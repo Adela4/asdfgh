@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompanyinfoViewDlg" widgetVar="CompanyinfoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCompanyinfoTitle}">
+            <h:form id="CompanyinfoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{companyinfoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCompanyinfoLabel_ciId}"/>
+                        <h:outputText value="#{companyinfoController.selected.ciId}" title="#{bundle.ViewCompanyinfoTitle_ciId}"/>
+                        <h:outputText value="#{bundle.ViewCompanyinfoLabel_ciText}"/>
+                        <h:outputText value="#{companyinfoController.selected.ciText}" title="#{bundle.ViewCompanyinfoTitle_ciText}"/>
+                        <h:outputText value="#{bundle.ViewCompanyinfoLabel_ciTime}"/>
+                        <h:outputText value="#{companyinfoController.selected.ciTime}" title="#{bundle.ViewCompanyinfoTitle_ciTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCompanyinfoLabel_MId}"/>
+                        <h:outputText value="#{companyinfoController.selected.MId}" title="#{bundle.ViewCompanyinfoTitle_MId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CompanyinfoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

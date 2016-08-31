@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BulletViewDlg" widgetVar="BulletViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewBulletTitle}">
+            <h:form id="BulletViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bulletController.selected != null}">
+                        <h:outputText value="#{bundle.ViewBulletLabel_BId}"/>
+                        <h:outputText value="#{bulletController.selected.BId}" title="#{bundle.ViewBulletTitle_BId}"/>
+                        <h:outputText value="#{bundle.ViewBulletLabel_BText}"/>
+                        <h:outputText value="#{bulletController.selected.BText}" title="#{bundle.ViewBulletTitle_BText}"/>
+                        <h:outputText value="#{bundle.ViewBulletLabel_BTime}"/>
+                        <h:outputText value="#{bulletController.selected.BTime}" title="#{bundle.ViewBulletTitle_BTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewBulletLabel_MId}"/>
+                        <h:outputText value="#{bulletController.selected.MId}" title="#{bundle.ViewBulletTitle_MId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="BulletViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

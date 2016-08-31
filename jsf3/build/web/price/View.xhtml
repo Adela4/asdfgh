@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PriceViewDlg" widgetVar="PriceViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPriceTitle}">
+            <h:form id="PriceViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{priceController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPriceLabel_PId}"/>
+                        <h:outputText value="#{priceController.selected.PId}" title="#{bundle.ViewPriceTitle_PId}"/>
+                        <h:outputText value="#{bundle.ViewPriceLabel_CId}"/>
+                        <h:outputText value="#{priceController.selected.CId}" title="#{bundle.ViewPriceTitle_CId}"/>
+                        <h:outputText value="#{bundle.ViewPriceLabel_PStart}"/>
+                        <h:outputText value="#{priceController.selected.PStart}" title="#{bundle.ViewPriceTitle_PStart}"/>
+                        <h:outputText value="#{bundle.ViewPriceLabel_PEnd}"/>
+                        <h:outputText value="#{priceController.selected.PEnd}" title="#{bundle.ViewPriceTitle_PEnd}"/>
+                        <h:outputText value="#{bundle.ViewPriceLabel_PBasic}"/>
+                        <h:outputText value="#{priceController.selected.PBasic}" title="#{bundle.ViewPriceTitle_PBasic}"/>
+                        <h:outputText value="#{bundle.ViewPriceLabel_PExtra}"/>
+                        <h:outputText value="#{priceController.selected.PExtra}" title="#{bundle.ViewPriceTitle_PExtra}"/>
+                        <h:outputText value="#{bundle.ViewPriceLabel_PTime}"/>
+                        <h:outputText value="#{priceController.selected.PTime}" title="#{bundle.ViewPriceTitle_PTime}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PriceViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

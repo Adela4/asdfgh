@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListBulletTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="BulletListForm">
+                <p:panel header="#{bundle.ListBulletTitle}">
+                    <p:dataTable id="datalist" value="#{bulletController.items}" var="item"
+                                 selectionMode="single" selection="#{bulletController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.BId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBulletTitle_BId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.BId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBulletTitle_BText}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.BText}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBulletTitle_BTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.BTime}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBulletTitle_MId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.MId}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{bulletController.prepareCreate}" update=":BulletCreateForm" oncomplete="PF('BulletCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":BulletViewForm" oncomplete="PF('BulletViewDialog').show()" disabled="#{empty bulletController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":BulletEditForm" oncomplete="PF('BulletEditDialog').show()" disabled="#{empty bulletController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{bulletController.destroy}" update=":growl,datalist" disabled="#{empty bulletController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

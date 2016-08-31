@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="Order1EditDlg" widgetVar="Order1EditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditOrder1Title}">
+            <h:form id="Order1EditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{order1Controller.selected != null}">
+                        <p:outputLabel value="#{bundle.EditOrder1Label_OId}" for="OId" />
+                        <p:inputText id="OId" value="#{order1Controller.selected.OId}" title="#{bundle.EditOrder1Title_OId}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_OId}"/>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_ONum}" for="ONum" />
+                        <p:inputText id="ONum" value="#{order1Controller.selected.ONum}" title="#{bundle.EditOrder1Title_ONum}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_ONum}"/>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_ODeliver}" for="ODeliver" />
+                        <p:inputText id="ODeliver" value="#{order1Controller.selected.ODeliver}" title="#{bundle.EditOrder1Title_ODeliver}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_ODeliver}"/>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_ODeliverTel}" for="ODeliverTel" />
+                        <p:inputText id="ODeliverTel" value="#{order1Controller.selected.ODeliverTel}" title="#{bundle.EditOrder1Title_ODeliverTel}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_ODeliverTel}"/>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_OReciver}" for="OReciver" />
+                        <p:inputText id="OReciver" value="#{order1Controller.selected.OReciver}" title="#{bundle.EditOrder1Title_OReciver}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_OReciver}"/>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_OReciverTel}" for="OReciverTel" />
+                        <p:inputText id="OReciverTel" value="#{order1Controller.selected.OReciverTel}" title="#{bundle.EditOrder1Title_OReciverTel}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_OReciverTel}"/>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_OStart}" for="OStart" />
+                        <p:inputText id="OStart" value="#{order1Controller.selected.OStart}" title="#{bundle.EditOrder1Title_OStart}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_OStart}"/>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_OEnd}" for="OEnd" />
+                        <p:inputText id="OEnd" value="#{order1Controller.selected.OEnd}" title="#{bundle.EditOrder1Title_OEnd}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_OEnd}"/>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_OState}" for="OState" />
+                        <p:inputText id="OState" value="#{order1Controller.selected.OState}" title="#{bundle.EditOrder1Title_OState}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_OState}"/>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_OTotal}" for="OTotal" />
+                        <p:inputText id="OTotal" value="#{order1Controller.selected.OTotal}" title="#{bundle.EditOrder1Title_OTotal}" />
+                        <p:outputLabel value="#{bundle.EditOrder1Label_OProfit}" for="OProfit" />
+                        <p:inputText id="OProfit" value="#{order1Controller.selected.OProfit}" title="#{bundle.EditOrder1Title_OProfit}" />
+                        <p:outputLabel value="#{bundle.EditOrder1Label_OWeight}" for="OWeight" />
+                        <p:inputText id="OWeight" value="#{order1Controller.selected.OWeight}" title="#{bundle.EditOrder1Title_OWeight}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_OWeight}"/>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_PTime}" for="PTime" />
+                        <p:inputText id="PTime" value="#{order1Controller.selected.PTime}" title="#{bundle.EditOrder1Title_PTime}" />
+                        <p:outputLabel value="#{bundle.EditOrder1Label_CId}" for="CId" />
+                        <p:selectOneMenu id="CId" value="#{order1Controller.selected.CId}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_CId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{companyController.itemsAvailableSelectOne}"
+                                           var="CIdItem"
+                                           itemValue="#{CIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_MId}" for="MId" />
+                        <p:selectOneMenu id="MId" value="#{order1Controller.selected.MId}" required="true" requiredMessage="#{bundle.EditOrder1RequiredMessage_MId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personController.itemsAvailableSelectOne}"
+                                           var="MIdItem"
+                                           itemValue="#{MIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditOrder1Label_PId}" for="PId" />
+                        <p:selectOneMenu id="PId" value="#{order1Controller.selected.PId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{priceController.itemsAvailableSelectOne}"
+                                           var="PIdItem"
+                                           itemValue="#{PIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{order1Controller.update}" value="#{bundle.Save}" update="display,:Order1ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Order1EditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="Order1EditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

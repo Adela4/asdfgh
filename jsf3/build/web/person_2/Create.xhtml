@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonCreateDlg" widgetVar="PersonCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePersonTitle}">
+            <h:form id="PersonCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePersonLabel_MId}" for="MId" />
+                        <p:inputText id="MId" value="#{personController.selected.MId}" title="#{bundle.CreatePersonTitle_MId}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_MId}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonLabel_MName}" for="MName" />
+                        <p:inputText id="MName" value="#{personController.selected.MName}" title="#{bundle.CreatePersonTitle_MName}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_MName}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonLabel_MTruename}" for="MTruename" />
+                        <p:inputText id="MTruename" value="#{personController.selected.MTruename}" title="#{bundle.CreatePersonTitle_MTruename}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_MTruename}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonLabel_MTel}" for="MTel" />
+                        <p:inputText id="MTel" value="#{personController.selected.MTel}" title="#{bundle.CreatePersonTitle_MTel}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_MTel}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonLabel_MPassword}" for="MPassword" />
+                        <p:inputText id="MPassword" value="#{personController.selected.MPassword}" title="#{bundle.CreatePersonTitle_MPassword}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_MPassword}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonLabel_MAuthority}" for="MAuthority" />
+                        <p:inputText id="MAuthority" value="#{personController.selected.MAuthority}" title="#{bundle.CreatePersonTitle_MAuthority}" required="true" requiredMessage="#{bundle.CreatePersonRequiredMessage_MAuthority}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personController.create}" value="#{bundle.Save}" update="display,:PersonListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

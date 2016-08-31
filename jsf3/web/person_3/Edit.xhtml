@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonEditDlg" widgetVar="PersonEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonTitle}">
+            <h:form id="PersonEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPersonLabel_MId}" for="MId" />
+                        <p:inputText id="MId" value="#{personController.selected.MId}" title="#{bundle.EditPersonTitle_MId}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_MId}"/>
+                        <p:outputLabel value="#{bundle.EditPersonLabel_MName}" for="MName" />
+                        <p:inputText id="MName" value="#{personController.selected.MName}" title="#{bundle.EditPersonTitle_MName}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_MName}"/>
+                        <p:outputLabel value="#{bundle.EditPersonLabel_MTruename}" for="MTruename" />
+                        <p:inputText id="MTruename" value="#{personController.selected.MTruename}" title="#{bundle.EditPersonTitle_MTruename}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_MTruename}"/>
+                        <p:outputLabel value="#{bundle.EditPersonLabel_MTel}" for="MTel" />
+                        <p:inputText id="MTel" value="#{personController.selected.MTel}" title="#{bundle.EditPersonTitle_MTel}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_MTel}"/>
+                        <p:outputLabel value="#{bundle.EditPersonLabel_MPassword}" for="MPassword" />
+                        <p:inputText id="MPassword" value="#{personController.selected.MPassword}" title="#{bundle.EditPersonTitle_MPassword}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_MPassword}"/>
+                        <p:outputLabel value="#{bundle.EditPersonLabel_MAuthority}" for="MAuthority" />
+                        <p:inputText id="MAuthority" value="#{personController.selected.MAuthority}" title="#{bundle.EditPersonTitle_MAuthority}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_MAuthority}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personController.update}" value="#{bundle.Save}" update="display,:PersonListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

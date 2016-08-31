@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BulletEditDlg" widgetVar="BulletEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBulletTitle}">
+            <h:form id="BulletEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bulletController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBulletLabel_BId}" for="BId" />
+                        <p:inputText id="BId" value="#{bulletController.selected.BId}" title="#{bundle.EditBulletTitle_BId}" required="true" requiredMessage="#{bundle.EditBulletRequiredMessage_BId}"/>
+                        <p:outputLabel value="#{bundle.EditBulletLabel_BText}" for="BText" />
+                        <p:inputText id="BText" value="#{bulletController.selected.BText}" title="#{bundle.EditBulletTitle_BText}" required="true" requiredMessage="#{bundle.EditBulletRequiredMessage_BText}"/>
+                        <p:outputLabel value="#{bundle.EditBulletLabel_BTime}" for="BTime" />
+                        <p:calendar id="BTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{bulletController.selected.BTime}" title="#{bundle.EditBulletTitle_BTime}" required="true" requiredMessage="#{bundle.EditBulletRequiredMessage_BTime}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditBulletLabel_MId}" for="MId" />
+                        <p:inputText id="MId" value="#{bulletController.selected.MId}" title="#{bundle.EditBulletTitle_MId}" required="true" requiredMessage="#{bundle.EditBulletRequiredMessage_MId}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bulletController.update}" value="#{bundle.Save}" update="display,:BulletListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BulletEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BulletEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

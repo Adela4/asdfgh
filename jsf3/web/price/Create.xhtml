@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PriceCreateDlg" widgetVar="PriceCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePriceTitle}">
+            <h:form id="PriceCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{priceController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePriceLabel_PId}" for="PId" />
+                        <p:inputText id="PId" value="#{priceController.selected.PId}" title="#{bundle.CreatePriceTitle_PId}" required="true" requiredMessage="#{bundle.CreatePriceRequiredMessage_PId}"/>
+                        <p:outputLabel value="#{bundle.CreatePriceLabel_CId}" for="CId" />
+                        <p:inputText id="CId" value="#{priceController.selected.CId}" title="#{bundle.CreatePriceTitle_CId}" required="true" requiredMessage="#{bundle.CreatePriceRequiredMessage_CId}"/>
+                        <p:outputLabel value="#{bundle.CreatePriceLabel_PStart}" for="PStart" />
+                        <p:inputText id="PStart" value="#{priceController.selected.PStart}" title="#{bundle.CreatePriceTitle_PStart}" required="true" requiredMessage="#{bundle.CreatePriceRequiredMessage_PStart}"/>
+                        <p:outputLabel value="#{bundle.CreatePriceLabel_PEnd}" for="PEnd" />
+                        <p:inputText id="PEnd" value="#{priceController.selected.PEnd}" title="#{bundle.CreatePriceTitle_PEnd}" required="true" requiredMessage="#{bundle.CreatePriceRequiredMessage_PEnd}"/>
+                        <p:outputLabel value="#{bundle.CreatePriceLabel_PBasic}" for="PBasic" />
+                        <p:inputText id="PBasic" value="#{priceController.selected.PBasic}" title="#{bundle.CreatePriceTitle_PBasic}" required="true" requiredMessage="#{bundle.CreatePriceRequiredMessage_PBasic}"/>
+                        <p:outputLabel value="#{bundle.CreatePriceLabel_PExtra}" for="PExtra" />
+                        <p:inputText id="PExtra" value="#{priceController.selected.PExtra}" title="#{bundle.CreatePriceTitle_PExtra}" required="true" requiredMessage="#{bundle.CreatePriceRequiredMessage_PExtra}"/>
+                        <p:outputLabel value="#{bundle.CreatePriceLabel_PTime}" for="PTime" />
+                        <p:inputText id="PTime" value="#{priceController.selected.PTime}" title="#{bundle.CreatePriceTitle_PTime}" required="true" requiredMessage="#{bundle.CreatePriceRequiredMessage_PTime}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{priceController.create}" value="#{bundle.Save}" update="display,:PriceListForm:datalist,:growl" oncomplete="handleSubmit(args,'PriceCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PriceCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
